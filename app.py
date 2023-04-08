@@ -29,7 +29,7 @@ def getaqi(x):
 	content=r.json()
 	for i in range(0,len(content["records"])):
 		if content["records"][i]["sitename"]==x or content["records"][i]["county"]==x :
-			str1+=content["records"][i]["sitename"]+":"+content["records"][i]["aqi"]+"\n"+"(%s)"%content["records"][i]["publishtime"]+"\n"
+			str1 += content["records"][i]["sitename"] + "：" + content["records"][i]["aqi"] + " 指標污染物：" + content["records"][i]["pollutant"] + "\n" + "(%s)"%content["records"][i]["publishtime"] + "\n"
 	if len(str1)==0:
 		return "查無資料"
 	else:
