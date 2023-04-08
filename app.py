@@ -69,8 +69,7 @@ def handle_message(event):
 		"""for i in (0,len(msg)):
 			if msg[i]=="A":
 				msg=msg[0:i]"""
-		#res=getaqi(msg)
-		res = "Hi"
+		res=getaqi(msg)
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=res))
 		lastmsg=msg
 	else:
