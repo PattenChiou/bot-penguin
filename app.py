@@ -25,7 +25,7 @@ handler = WebhookHandler('3b49855fa281d4d63dfe85bb9cb24f1e')
 
 def getaqi(x):
 	str1=""
-	r=requests.get("https://data.epa.gov.tw/api/v1/aqx_p_432?limit=1000&api_key=9be7b239-557b-4c10-9775-78cadfc555e9&sort=ImportDate%20desc&format=json")
+	r=requests.get("https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON")
 	content=r.json()
 	for i in range(0,len(content["records"])):
 		if content["records"][i]["SiteName"]==x or content["records"][i]["County"]==x :
