@@ -5,7 +5,7 @@ Created on Thu Jul 29 22:16:59 2021
 @author: Patten
 """
 
-import requests, json
+import requests
 from flask import Flask, request, abort
 
 from linebot import (
