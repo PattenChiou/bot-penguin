@@ -5,7 +5,7 @@ Created on Thu Jul 29 22:16:59 2021
 @author: Patten
 """
 
-import requests
+import requests, json
 from flask import Flask, request, abort
 
 from linebot import (
@@ -36,6 +36,20 @@ def getaqi(x):
 		return str1
 #a=getaqi()
 #print(a)
+def talkToChatGPT(msg):
+	message = [{"role" : "user", "content" : msg}]
+	requestBody = {"model" : "gpt-3.5-turbo",
+            "messages" : message,
+            "temperature" : 0.5,
+            "max_tokens" : 1000,
+            "top_p" : 1,
+            "frequency_penalty" : 0,
+            "presence_penalty" : 0
+            }
+	headers = {"contentType" : "application/json", "Authorization" : "Bearer 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"}
+	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
+	response = result.json()
+	return response
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -60,6 +74,8 @@ def handle_message(event):
 	global msg
 	global lastmsg
 	msg=event.message.text
+	chatGPTResponse = talkToChatGPT(msg)
+	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
 	if msg=="AQI":
 		#res=getaqi()
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入欲查詢城市"))
