@@ -37,8 +37,8 @@ def getaqi(x):
 		return str1
 #a=getaqi()
 #print(a)
-def talkToChatGPT(msg):
-	message = [{"role" : "user", "content" : msg}]
+def talkToChatGPT(content):
+	message = [{"role" : "user", "content" : content}]
 	requestBody = {"model" : "gpt-3.5-turbo",
             "messages" : message,
             "temperature" : 0.5,
@@ -79,9 +79,9 @@ def handle_message(event):
 	global msg
 	global lastmsg
 	msg=event.message.text
+	chatGPTResponse = talkToChatGPT(msg)
+	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
 	if msg=="AQI":
-		chatGPTResponse = talkToChatGPT(msg)
-		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
 		#res=getaqi()
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入欲查詢城市"))
 		lastmsg="AQI"
