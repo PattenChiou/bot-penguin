@@ -79,8 +79,8 @@ def handle_message(event):
 	global msg
 	global lastmsg
 	msg=event.message.text
-	chatGPTResponse = talkToChatGPT(msg)
-	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
+	# chatGPTResponse = talkToChatGPT(msg)
+	line_bot_api.reply_message(event.reply_token,TextSendMessage(text="不是ChatGPT說的：夠囉"))
 	if msg=="AQI":
 		#res=getaqi()
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入欲查詢城市"))
