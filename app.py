@@ -5,7 +5,8 @@ Created on Thu Jul 29 22:16:59 2021
 @author: Patten
 """
 
-import requests
+import requests, json
+import os
 from flask import Flask, request, abort
 
 from linebot import (
@@ -20,8 +21,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('Jy/ZzuRD+p9OpnjsUDgxenc+p2eUOcMBFzkRar2ktv9KvBBskzVo2ElbWgjJV8SqFiOHpz4ly7THIjD78+t8a8VP6rzA1HV1cEKiw7lwzvicbpLR8khk6e0nbRH3Kk1WpD7b3MAdPIi9NppErT2OOAdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('3b49855fa281d4d63dfe85bb9cb24f1e')
+line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_TOKEN"))
+handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 
 def getaqi(x):
 	str1=""
@@ -46,7 +47,7 @@ def talkToChatGPT(msg):
             "frequency_penalty" : 0,
             "presence_penalty" : 0
             }
-	headers = {"contentType" : "application/json", "Authorization" : "Bearer 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"}
+	headers = {"contentType" : "application/json", "Authorization" : "Bearer " + os.getenv("CHATGPT_API_KEY")}
 	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
 	response = result.json()
 	return response["choices"][0]["message"]["content"]
