@@ -38,7 +38,7 @@ def getaqi(x):
 #a=getaqi()
 #print(a)
 def talkToChatGPT(content):
-	message = [{"role" : "user", "content" : content}]
+	message = [{"role" : "user", "content" : content}, {"role" : "system", "content" : "You are a chatbot whose name is 'Penguin'."}]
 	requestBody = {"model" : "gpt-3.5-turbo",
             "messages" : message,
             "temperature" : 0.5,
