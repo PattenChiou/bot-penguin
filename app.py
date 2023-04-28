@@ -48,20 +48,20 @@ def talkToChatGPT(msg):
             "presence_penalty" : 0
             }
 	headers = {"contentType" : "application/json", "Authorization" : "Bearer " + os.getenv("CHATGPT_API_KEY")}
+	print("不是requests.post的問題")
 	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
+	print("是requests.post的問題")
 	response = result.json()
+	print("chatgpt: " + response)
 	return response["choices"][0]["message"]["content"]
-@app.route("/callback_line", methods=['POST'])
-def callback_line():
+@app.route("/callback", methods=['POST'])
+def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
-    print("Signature: " + signature)
 
     # get request body as text
     body = request.get_data(as_text=True)
-    print("body1: " + body)
     app.logger.info("Request body: " + body)
-    print("body2: " + body)
 
     # handle webhook body
     try:
@@ -79,7 +79,6 @@ def handle_message(event):
 	global lastmsg
 	msg=event.message.text
 	chatGPTResponse = talkToChatGPT(msg)
-	print(chatGPTResponse)
 	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
 	if msg=="AQI":
 		#res=getaqi()
