@@ -51,7 +51,7 @@ def talkToChatGPT(msg):
 	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
 	response = result.json()
 	return response["choices"][0]["message"]["content"]
-@app.route("/callback", methods=['POST'])
+@app.route("/callback_line", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
