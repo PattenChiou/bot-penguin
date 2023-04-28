@@ -49,9 +49,10 @@ def talkToChatGPT(msg):
             }
 	headers = {"contentType" : "application/json", "Authorization" : "Bearer " + os.getenv("CHATGPT_API_KEY")}
 	print("不是requests.post的問題")
-	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
+	# result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
 	print("是requests.post的問題")
-	response = result.json()
+	# response = result.json()
+	response = {'id': 'chatcmpl-7ACnqi3uCpOniCcQUZQkaBj2F6hAQ', 'object': 'chat.completion', 'created': 1682666850, 'model': 'gpt-3.5-turbo-0301', 'usage': {'prompt_tokens': 12, 'completion_tokens': 11, 'total_tokens': 23}, 'choices': [{'message': {'role': 'assistant', 'content': '這不是ChatGPT說的：這是一個測試。'}, 'finish_reason': 'stop', 'index': 0}]}
 	print(response)
 	return response["choices"][0]["message"]["content"]
 @app.route("/callback", methods=['POST'])
