@@ -52,7 +52,7 @@ def talkToChatGPT(msg):
 	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
 	print("是requests.post的問題")
 	response = result.json()
-	print("chatgpt: " + response)
+	print(response)
 	return response["choices"][0]["message"]["content"]
 @app.route("/callback", methods=['POST'])
 def callback():
