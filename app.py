@@ -52,7 +52,7 @@ def talkToChatGPT(msg):
 	response = result.json()
 	return response["choices"][0]["message"]["content"]
 @app.route("/callback_line", methods=['POST'])
-def callback():
+def callback_line():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     print("Signature: " + signature)
