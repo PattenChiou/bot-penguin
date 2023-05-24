@@ -38,7 +38,7 @@ def getaqi(x):
 #a=getaqi()
 #print(a)
 def talkToChatGPT(content):
-	message = [{"role" : "assistant", "content" : "現在我是一個具有同理心及具備專業心理學知識的心理諮商師，但不是每個跟我聊天的都是需要心理有狀況的人有些人可能只是想聊聊天所以要視情況回答"}, {"role" : "user", "content" : content}]
+	message = [{"role" : "assistant", "content" : "現在你是一個具有同理心及具備專業心理學知識的心理諮商師，但不是每個跟你聊天的都是需要心理有狀況的人有些人可能只是想聊聊天所以要視情況回答"}, {"role" : "user", "content" : content}]
 	requestBody = {"model" : "gpt-3.5-turbo",
             "messages" : message,
             "temperature" : 0.9,
