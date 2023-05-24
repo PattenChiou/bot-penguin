@@ -41,14 +41,14 @@ def talkToChatGPT(content):
 	message = [{"role" : "system", "content" : "You are a helpful assistant."}, {"role" : "user", "content" : content}]
 	requestBody = {"model" : "gpt-3.5-turbo",
             "messages" : message,
-            "temperature" : 1,
-            "max_tokens" : 1000,
+            "temperature" : 0.9,
+            "max_tokens" : 160,
             "frequency_penalty" : 0,
-            "presence_penalty" : 0
+            "presence_penalty" : 0.6
             }
 	headers = {"contentType" : "application/json", "Authorization" : "Bearer " + os.getenv("CHATGPT_API_KEY")}
 	# print("不是requests.post的問題")
-	result = requests.post("https://api.openai.com/v1/completions", headers = headers, json = requestBody)
+	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
 	# print("是requests.post的問題")
 	response = result.json()
 	# response = {'id': 'chatcmpl-7ACnqi3uCpOniCcQUZQkaBj2F6hAQ', 'object': 'chat.completion', 'created': 1682666850, 'model': 'gpt-3.5-turbo-0301', 'usage': {'prompt_tokens': 12, 'completion_tokens': 11, 'total_tokens': 23}, 'choices': [{'message': {'role': 'assistant', 'content': '這不是ChatGPT說的：這是一個測試。'}, 'finish_reason': 'stop', 'index': 0}]}
