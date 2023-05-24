@@ -41,9 +41,8 @@ def talkToChatGPT(content):
 	message = [{"role" : "system", "content" : "You are a helpful assistant."}, {"role" : "user", "content" : content}]
 	requestBody = {"model" : "gpt-3.5-turbo",
             "messages" : message,
-            "temperature" : 0.5,
+            "temperature" : 1,
             "max_tokens" : 1000,
-            "top_p" : 1,
             "frequency_penalty" : 0,
             "presence_penalty" : 0
             }
