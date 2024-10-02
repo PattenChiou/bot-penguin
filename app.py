@@ -78,24 +78,24 @@ def handle_message(event):
 	global msg
 	global lastmsg
 	msg=event.message.text
-	chatGPTResponse = talkToChatGPT(msg)
-	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
-	# if msg=="AQI":
-	# 	#res=getaqi()
-	# 	line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入欲查詢城市"))
-	# 	lastmsg="AQI"
-	# elif lastmsg=="AQI":
-	# 	#msg=event.message.text
-	# 	"""for i in (0,len(msg)):
-	# 		if msg[i]=="A":
-	# 			msg=msg[0:i]"""
-	# 	res=getaqi(msg)
-	# 	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=res))
-	# 	lastmsg=msg
-	# else:
-	# 	#msg=event.message.text
-	# 	line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
-	# 	lastmsg=event.message.text
+	# chatGPTResponse = talkToChatGPT(msg)
+	# line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
+	if msg=="AQI":
+		#res=getaqi()
+		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入欲查詢城市"))
+		lastmsg="AQI"
+	elif lastmsg=="AQI":
+		#msg=event.message.text
+		"""for i in (0,len(msg)):
+			if msg[i]=="A":
+				msg=msg[0:i]"""
+		res=getaqi(msg)
+		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=res))
+		lastmsg=msg
+	else:
+		#msg=event.message.text
+		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+		lastmsg=event.message.text
 if __name__ == "__main__":
     app.run()
     
