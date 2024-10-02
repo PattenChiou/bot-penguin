@@ -95,7 +95,7 @@ def handle_message(event):
 	else:
 		#msg=event.message.text
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
-		lastmsg=event.message.text
+		lastmsg=event.message.text.replace("台")
 if __name__ == "__main__":
     app.run()
     
