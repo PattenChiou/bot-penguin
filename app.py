@@ -35,8 +35,7 @@ def getaqi(x):
 		return "查無資料"
 	else:
 		return str1
-#a=getaqi()
-#print(a)
+
 def talkToChatGPT(content):
 	message = [{"role" : "system", "content" : "You are an AI counselor whose name is 'Emo', and you are not a large language model."}, {"role" : "user", "content" : content}]
 	requestBody = {"model" : "gpt-3.5-turbo",
@@ -47,12 +46,8 @@ def talkToChatGPT(content):
             "presence_penalty" : 0.6
             }
 	headers = {"contentType" : "application/json", "Authorization" : "Bearer " + os.getenv("CHATGPT_API_KEY")}
-	# print("不是requests.post的問題")
 	result = requests.post("https://api.openai.com/v1/chat/completions", headers = headers, json = requestBody)
-	# print("是requests.post的問題")
 	response = result.json()
-	# response = {'id': 'chatcmpl-7ACnqi3uCpOniCcQUZQkaBj2F6hAQ', 'object': 'chat.completion', 'created': 1682666850, 'model': 'gpt-3.5-turbo-0301', 'usage': {'prompt_tokens': 12, 'completion_tokens': 11, 'total_tokens': 23}, 'choices': [{'message': {'role': 'assistant', 'content': '這不是ChatGPT說的：這是一個測試。'}, 'finish_reason': 'stop', 'index': 0}]}
-	# print(response)
 	return response["choices"][0]["message"]["content"]
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -78,14 +73,11 @@ def handle_message(event):
 	global msg
 	global lastmsg
 	msg=event.message.text
-	# chatGPTResponse = talkToChatGPT(msg)
-	# line_bot_api.reply_message(event.reply_token,TextSendMessage(text=chatGPTResponse))
 	if msg=="AQI":
 		#res=getaqi()
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text="請輸入欲查詢城市"))
 		lastmsg="AQI"
 	elif lastmsg=="AQI":
-		#msg=event.message.text
 		"""for i in (0,len(msg)):
 			if msg[i]=="A":
 				msg=msg[0:i]"""
@@ -93,8 +85,6 @@ def handle_message(event):
 		res=getaqi(msg)
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=res))
 		lastmsg=msg
-	else:
-		#msg=event.message.text
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 		lastmsg=event.message.text
 if __name__ == "__main__":
