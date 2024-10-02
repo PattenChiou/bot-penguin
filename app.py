@@ -89,13 +89,14 @@ def handle_message(event):
 		"""for i in (0,len(msg)):
 			if msg[i]=="A":
 				msg=msg[0:i]"""
+		msg = msg.replace("台", "臺")
 		res=getaqi(msg)
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=res))
 		lastmsg=msg
 	else:
 		#msg=event.message.text
 		line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
-		lastmsg=event.message.text.replace("台", "臺")
+		lastmsg=event.message.text
 if __name__ == "__main__":
     app.run()
     
